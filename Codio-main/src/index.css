@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Codio Brand Colors */
+    --background: 0 0% 10.6%;         /* #1B1B1B */
+    --background-hex: #1b1b1b;
+
+    --foreground: 0 0% 100%;          /* #FFFFFF */
+    --foreground-hex: #ffffff;
+
+    --card: 0 0% 15%;                 /* #262626 */
+    --card-hex: #262626;
+
+    --card-foreground: 0 0% 100%;     /* #FFFFFF */
+    --card-foreground-hex: #ffffff;
+
+    --popover: 0 0% 12%;              /* #1F1F1F */
+    --popover-hex: #1f1f1f;
+
+    --popover-foreground: 0 0% 100%;  /* #FFFFFF */
+    --popover-foreground-hex: #ffffff;
+
+    --primary: 63 100% 55%;           /* #F7FF34 */
+    --primary-hex: #f7ff34;
+
+    --primary-foreground: 0 0% 10%;   /* #1A1A1A */
+    --primary-foreground-hex: #1a1a1a;
+
+    --secondary: 0 0% 20%;            /* #333333 */
+    --secondary-hex: #333333;
+
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+    --secondary-foreground-hex: #ffffff;
+
+    --muted: 0 0% 25%;                /* #404040 */
+    --muted-hex: #404040;
+
+    --muted-foreground: 0 0% 70%;     /* #B3B3B3 */
+    --muted-foreground-hex: #b3b3b3;
+
+    --accent: 63 100% 55%;            /* #F7FF34 */
+    --accent-hex: #f7ff34;
+
+    --accent-foreground: 0 0% 10%;    /* #1A1A1A */
+    --accent-foreground-hex: #1a1a1a;
+
+    --destructive: 0 84.2% 60.2%;     /* #F04646 */
+    --destructive-hex: #f04646;
+
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+    --destructive-foreground-hex: #ffffff;
+
+    --border: 0 0% 25%;               /* #404040 */
+    --border-hex: #404040;
+
+    --input: 0 0% 20%;                /* #333333 */
+    --input-hex: #333333;
+
+    --ring: 63 100% 55%;              /* #F7FF34 */
+    --ring-hex: #f7ff34;
+
+    --radius: 1rem;
+
+    /* Gradient definitions */
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(63 100% 55% / 0.2), /* #F7FF34 at 20% opacity */
+      hsl(63 100% 55% / 0.05) /* #F7FF34 at 5% opacity */
+    );
+    --gradient-hero-hex: linear-gradient(
+      135deg,
+      #f7ff3433,
+      #f7ff340d
+    );
+
+    --gradient-card: linear-gradient(
+      180deg,
+      hsl(0 0% 15%),  /* #262626 */
+      hsl(0 0% 12%)   /* #1F1F1F */
+    );
+    --gradient-card-hex: linear-gradient(
+      180deg,
+      #262626,
+      #1f1f1f
+    );
+
+    /* Shadows with brand color glow */
+    --shadow-glow: 0 0 40px hsl(63 100% 55% / 0.3); /* #F7FF34 at 30% */
+    --shadow-glow-hex: 0 0 40px #f7ff344d;
+
+    --shadow-elegant: 0 10px 30px -10px hsl(63 100% 55% / 0.2); /* 20% */
+    --shadow-elegant-hex: 0 10px 30px -10px #f7ff3433;
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-arabic;
+  }
+  
+  body[dir="ltr"] {
+    @apply font-display;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+
+
+
+/* for the grid of features cards in the user*/
+
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  0% { --rotate: 0deg; }
+  100% { --rotate: 360deg; }
+}
+
+.feature-card {
+  position: relative;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.75rem;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--rotate),
+    #FACC15,
+    #FDE047,
+    #FACC15
+  );
+  animation: spin 3s linear infinite;
+  z-index: -1;
+}
+
+.feature-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1.5rem;
+  backdrop-filter: blur(30px);
+  z-index: -2;
+}
